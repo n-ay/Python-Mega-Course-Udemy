@@ -23,6 +23,6 @@ results=cursor.fetchall()
 
 if results:
     for res in results:
-        print(translate(res[1]))
+        print(res[1])
 else:
     print("No words found")
