@@ -19,26 +19,9 @@ cursor = con.cursor()
 query=cursor.execute("SELECT * FROM Dictionary WHERE Expression = '%s' " % word)
 results=cursor.fetchall()
 
-def translate(w):
-    w= w.lower()
-    if w in results:
-        return results[w]
-    elif w.title() in results: 
-        return results[w.title()]
-    elif w.upper() in results:
-        return results[w.upper()]
-    elif len(get_close_matches(w,results.keys()))>0 :
-        message = input("Did you mean %s instead? Enter Yes or No (Y/N) :" % get_close_matches(w,results.keys())[0])
-        message=message.upper()
-        if message[0]=='Y':
-            return results[get_close_matches(w,results.keys())[0]]
-        else:
-            return "We didn't understand your entry."
 
-    else:
-        return "The word doesn't exist."
 
-if type(results)==list:
+if results:
     for res in results:
         print(translate(res[1]))
 else:
